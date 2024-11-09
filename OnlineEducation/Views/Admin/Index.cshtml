@@ -1,0 +1,71 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_AdminLayout";
+}
+<style>
+    .dashboard
+    {
+        height:200px;
+        text-align:center;
+        padding:30px;
+        padding-top:50px;
+    }
+</style>
+<br />
+<h1 class="text-center">Welcome To Admin Dashboard</h1>
+<br />
+<div class="row">
+    <div class="col-sm-4">
+        <a asp-action="Slider" style="text-decoration:none;">
+        <div class="card dashboard">
+            <h4><i class="fa-solid fa-sliders"></i></h4><br />
+            <h4>Manage Slider</h4>
+        </div>
+        </a>
+    </div>
+    <div class="col-sm-4">
+        <a asp-action="ManageUser" style="text-decoration:none;">
+        <div class="card dashboard">
+            <h4><i class="fa-solid fa-users"></i></h4><br />
+            <h4>Manage Users</h4>
+        </div>
+        </a>
+    </div>
+    <div class="col-sm-4">
+        <a asp-action="DeletedUser" style="text-decoration:none;">
+        <div class="card dashboard">
+            <h4><i class="fa-solid fa-users-slash"></i></h4><br />
+            <h4>Manage Deleted Users</h4>
+        </div>
+        </a>
+    </div>
+</div>
+
+<div class="row pt-3">
+    <div class="col-sm-4">
+        <a asp-action="ManageReader" style="text-decoration:none;">
+        <div class="card dashboard">
+            <h4><i class="fa-solid fa-book-open-reader"></i></h4><br />
+            <h4>Manage Readers</h4>
+        </div>
+        </a>
+    </div>
+    <div class="col-sm-4">
+        <a asp-action="ManageCourse" style="text-decoration:none;">
+        <div class="card dashboard">
+            <h4><i class="fa-solid fa-book"></i></h4><br />
+            <h4>Manage Courses</h4>
+        </div>
+        </a>
+    </div>
+    <div class="col-sm-4">
+        <a asp-action="ManageContact" style="text-decoration:none;">
+        <div class="card dashboard">
+            <h4><i class="fa-solid fa-address-card"></i></h4><br />
+            <h4>Manage Contacts</h4>
+        </div>
+        </a>
+    </div>
+</div>

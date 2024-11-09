@@ -1,0 +1,49 @@
+﻿@model IEnumerable<OnlineEducation.Models.purchase>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_AdminLayout";
+}
+
+<br />
+<h1 class="text-center">Purchase Courses</h1>
+<br />
+
+<table class="table table-bordered table-hover text-center">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>City</th>
+            <th>Pincode</th>
+            <th>Address</th>
+            <th>Payment Mode</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int sr = 1;
+        }
+        @foreach(var data in Model)
+        {
+            <tr>
+                <td>@sr</td>
+                <td>@data.name</td>
+                <td>@data.email</td>
+                <td>@data.mobile</td>
+                <td>@data.city</td>
+                <td>@data.pincode</td>
+                <td>@data.address</td>
+                <td>@data.paymentmode</td>
+                <td>
+                    <a class="btn btn-danger" asp-action="PurchaseDelete" asp-route-id="@data.id">Delete</a>
+                </td>
+            </tr>
+            sr++;
+        }
+    </tbody>
+</table>

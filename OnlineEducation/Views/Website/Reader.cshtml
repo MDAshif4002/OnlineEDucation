@@ -1,0 +1,37 @@
+﻿@model IEnumerable<OnlineEducation.Models.reader>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_WebsiteLayout";
+    ViewBag.title = "Readers";
+}
+
+<style>
+    .col
+    {
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+    }
+    .card {
+        padding: 10px;
+        margin: 10px;
+    }
+    img
+    {
+        height:200px;
+        width:100%;
+    }
+</style>
+
+<h1 class="text-center mt-5 mb-5">Our Readers</h1><hr class="ms-5 me-5" />
+ <div class="row">
+    <div class="col-sm-12 col">
+        @foreach(var data in Model)
+        {
+                <div class="card">
+                    <img src="~/ReaderPicture/@data.readerpic" />
+                </div>
+        }
+    </div>
+</div>

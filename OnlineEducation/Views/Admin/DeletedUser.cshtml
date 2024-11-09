@@ -1,0 +1,45 @@
+﻿  @model IEnumerable<OnlineEducation.Models.register>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_AdminLayout";
+    ViewBag.title = "Manage User";
+}
+
+<h1>Manage Deleted Users</h1>
+<br />
+<table class="table table-bordered table-hover text-center">
+    <thead>
+        <tr>
+            <th>Sr</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Mobile</th>
+            <th>City</th>
+            <th>Password</th>
+            <th>Delete</th>
+            <th>Restore</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int sr = 1;
+        }
+        @foreach (var x in Model)
+        {
+            <tr>
+                <td>@sr</td>
+                <td>@x.name</td>
+                <td>@x.email</td>
+                <td>@x.mobile</td>
+                <td>@x.city</td>
+                <td>@x.password</td>
+                <td><a class="btn btn-danger" asp-action="DeleteUser" asp-route-id="@x.id">Delete</a></td>
+                <td><a class="btn btn-success" asp-action="RestoreUser" asp-route-id="@x.id">Restore</a></td>
+            </tr>
+            sr++;
+        }
+    </tbody>
+
+</table>

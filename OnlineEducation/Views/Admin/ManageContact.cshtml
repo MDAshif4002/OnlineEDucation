@@ -1,0 +1,41 @@
+﻿@model IEnumerable<OnlineEducation.Models.managecontact>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_AdminLayout";
+    ViewBag.title = "Contacts";
+}
+
+<h1>Manage Contacts</h1>
+<br />
+<br />
+<table class="table table-bordered table-hover text-center">
+    <thead>
+        <tr>
+            <th>Sr</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Message</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int sr = 1;
+        }
+        @foreach(var data in Model)
+        {
+            <tr>
+                <td>@sr</td>
+                <td>@data.name</td>
+                <td>@data.email</td>
+                <td>@data.message</td>
+                <td>
+                    <a class="btn btn-danger" asp-route-id="@data.id" asp-action="DeleteContact" asp-controller="Admin" onclick="return confirm('Are you sure want to delete this contact?')">Delete</a>
+                </td>
+            </tr>
+            sr++;
+        }
+    </tbody>
+</table>

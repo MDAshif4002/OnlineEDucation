@@ -1,0 +1,139 @@
+﻿@model IEnumerable<OnlineEducation.Models.managecategory>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_AdminLayout";
+}
+<h1>Manage Users</h1>
+<br />
+<a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#managecategory">Add New Category</a>
+<br />
+<br />
+<table class="table table-bordered table-hover text-center mydatatable">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Description</th>
+        <th>Image</th>
+        <th>Category Id</th>
+        <th>Delete</th>
+    </tr>
+
+    @foreach(var x in Model)
+    {
+        <tr>
+            <td>@x.id</td>
+            <td>@x.name</td>
+            <td>@x.price</td>
+            <td>@x.description</td>
+            <td><img src="~/category/@x.image" style="height:100px;" /></td>
+            <td>@x.categoryid</td>
+            <td><a class="btn btn-danger" asp-action="ManageCategoryDelete" asp-route-id="@x.id">Delete</a></td>
+        </tr>
+    }
+</table>
+
+
+<div class="modal" id="managecategory">
+    <div class="modal-dialog model-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add New Category</h4>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-action="ManageCategory" enctype="multipart/form-data">
+                    <label>Name</label>
+                    <input type="text" name="name" class="form-control" />
+                    <label>Price</label>
+                    <input type="text" name="price" class="form-control" />
+                    <label>Description</label>
+                    <input type="text" name="description" class="form-control" />
+                    <label>Image</label>
+                    <input type="file" name="image" class="form-control" />
+                    <label>Category Id</label>
+                    <input type="text" name="categoryid" class="form-control" />
+                    <br />
+                    <button class="btn btn-warning">Add Category</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function changestatus(id)
+    {
+        window.location.href = "/Admin/CategoryStatus/"+id;
+    }
+</script>
+
+
+@section style {
+    <style>
+        /* The switch - the box around the slider */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+            /* Hide default HTML checkbox */
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+        /* The slider */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 26px;
+                width: 26px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+        /* input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        } */
+
+        /* input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px); 
+        }*/
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+            .slider.round:before {
+                border-radius: 50%;
+            }
+    </style>
+}

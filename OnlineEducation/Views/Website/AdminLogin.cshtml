@@ -1,0 +1,74 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<style>
+    .main
+    {
+        height:400px;
+        width:350px;
+        background:whitesmoke;
+        margin: 50px auto;
+        padding:40px;
+    }
+    .heading
+    {
+        font-size:22px;
+        font-family:Arial, Verdana, Geneva, Tahoma, sans-serif;
+    }
+    label
+    {
+        font-size:20px;
+    }
+    input
+    {
+        height:40px;
+        width:345px;
+        outline:none;
+        padding:5px;
+        background-color:transparent;
+        border:none;
+        border-bottom:1px solid black;
+        font-size:16px;
+    }
+    .btn
+    {
+        height:40px;
+        width:345px;
+        color:white;
+        font-weight:bold;
+        background-color:black;
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size:18px;
+        border:none;
+        border-radius:25px;
+        text-align:center;
+        line-height:40px;
+    }
+    a
+    {
+        text-decoration:none;
+    }
+</style>
+
+
+<div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4 main">
+        <form method="post" asp-action="AdminLogin">
+        <p class="heading">LOGIN AS ADMIN</p>
+            <label>Email</label><br /><br />
+            <input type="email" name="email" class="form-control" placeholder="Email" required />
+            <br /><br />
+            <label>Password</label><br /><br />
+            <input type="password" name="password" class="form-control" placeholder="Password" required />
+            <br /><br /><br />
+            <button class="btn">Login</button>
+            <p style="color:red;">@TempData["msg"]</p>
+            <br />
+            <a asp-action="Index">← <span style="color:gray;">Back to Home</span></a>
+        </form>
+    </div>
+</div>

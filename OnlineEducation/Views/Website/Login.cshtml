@@ -1,0 +1,26 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_WebsiteLayout";
+}
+
+<div class="row mt-5 mb-5">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-header text-center text-bg-primary"><h4>Login Here</h4></div>
+            <div class="card-body">
+                <form method="post" asp-action="Login">
+                    <label>Email</label>
+                    <input type="email" name="email" class="form-control" placeholder="Enter Your Name" />
+                    <label>Passworsd</label>
+                    <input type="password" name="password" class="form-control" placeholder="Enter Your Password" />
+                    <br />
+                    <button class="btn btn-outline-primary">Login</button>
+                    <a class="btn btn-outline-danger" asp-action="ChangePassword">Change Password</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
