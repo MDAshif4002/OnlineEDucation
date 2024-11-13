@@ -12,5 +12,6 @@ namespace OnlineEducation.Models
         public string? city { get; set; }
         public string? password { get; set; }
         public bool? deleteduser { get; set; }
+        public string? otp {  get; set; }
     }
 }

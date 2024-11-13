@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using OnlineEducation.Models;
 
 namespace OnlineEducation.Controllers
@@ -12,6 +13,7 @@ namespace OnlineEducation.Controllers
             _context = context;
             _environment = environment;
         }
+        
         public IActionResult Index()
         {
             if (HttpContext.Session.GetString("admin") == null)

@@ -1,14 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using OnlineEducation.Models;
+using OnlineEducation.Services;
 
 namespace OnlineEducation.Controllers
 {
     public class WebsiteController : Controller
     {
         public AppDbContext _context;
-        public WebsiteController(AppDbContext context)
+        public IWebHostEnvironment _environment;
+        public EmailSender _emailSender;
+        public WebsiteController(AppDbContext context,IWebHostEnvironment environment,EmailSender emailSender)
         {
             _context = context;
+            _environment = environment;
+            _emailSender = emailSender;
+        }
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            if (HttpContext.Session.GetString("user") != null)
+            {
+                TempData["loginstatus"] = "true";
+            }
+            base.OnActionExecuting(context);
         }
         public IActionResult Index()
         {
@@ -129,19 +143,65 @@ namespace OnlineEducation.Controllers
         }
         public IActionResult Register()
         {
+            
             return View();
         }
         [HttpPost]
-        public IActionResult SaveRegister(register reg)
+        public async Task<IActionResult> SaveRegister(register reg, string email)
         {
             
-            var data = _context.register.FirstOrDefault(x => x.email == reg.email || x.password == reg.password);
-            if (data == null)
+            var data = _context.register.FirstOrDefault(x => x.email == reg.email);
+            if (data != null)
             {
+                //otp start
+                Random rnd = new Random();
+                int num = rnd.Next(10000, 99999);
+
+                HttpContext.Session.SetString("otp", num.ToString());
+                HttpContext.Session.SetString("email", email);
+
+                string sendto = email;
+                string subject = "OTP for Registration";
+                string mail = "Dear User, OTP for Registration is-"+num;
+                await _emailSender.SendEmailAsync(sendto, subject, mail);
+                //otp end
+
                 _context.register.Add(reg);
                 _context.SaveChanges();
+
+                return RedirectToAction("RegOtp", "Website");
             }
-            return RedirectToAction("Register");
+            else
+            {
+                TempData["msg"] = "OTP is Incorrect";
+                return RedirectToAction("Register" , "Website");
+            }
+        }
+
+        public IActionResult RegOtp()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult RegOtp(string otp)
+        {
+            string originalotp = HttpContext.Session.GetString("otp");
+            if(otp == originalotp)
+            {
+                string email = HttpContext.Session.GetString("email");
+                var data = _context.register.FirstOrDefault(x =>x.email == email);
+                data.otp = otp;
+                _context.register.Update(data);
+                _context.SaveChanges();
+                HttpContext.Session.Clear();
+
+                return RedirectToAction("Login","Website");
+            }
+            else
+            {
+                TempData["msg"] = "Entered Incorrect OTP";
+                return RedirectToAction("RegOtp","Website");
+            }
         }
         public IActionResult AdminLogin()
         {
